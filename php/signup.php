@@ -2,6 +2,8 @@
 
 require_once('connection.php');
 
+$_POST = json_decode(file_get_contents('php://input'), true);
+
 // Comprobar el POST
 // echo "<pre>";
 // var_dump($_POST);
@@ -9,8 +11,7 @@ require_once('connection.php');
 
 $nombre = $_POST['nombre'];
 $apellidos = $_POST['apellidos'];
-$password1 = $_POST['password1'];
-$password2 = $_POST['password2'];
+$password = $_POST['password'];
 $email = $_POST['email'];
 $nif = $_POST['nif'];
 $telefono = $_POST['telefono'];
@@ -18,7 +19,7 @@ $direccion = $_POST['direccion'];
 $ciudad = $_POST['ciudad'];
 
 // Password encriptado 
-$password1 = password_hash($password1, PASSWORD_DEFAULT);
+$password1 = password_hash($password, PASSWORD_DEFAULT);
 
 // echo strlen($password1);
 
