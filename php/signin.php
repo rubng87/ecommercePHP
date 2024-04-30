@@ -26,6 +26,7 @@ if (password_verify($password_user, $password_hash)) {
     // echo "Usuario o contraseña correctos";
     $_SESSION['nombre_cliente'] = $result['nombre_cliente'];
     $_SESSION['apellidos_cliente'] = $result['apellidos_cliente'];
+    $_SESSION['id_cliente'] = $result['id_cliente'];
     header('Location: ecommerce.php');
     
 } else {

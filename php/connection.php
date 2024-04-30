@@ -22,7 +22,7 @@ try {
     $conn->exec("SET CHARACTER_SET_RESULTS = 'utf8'");
     $conn->exec("SET COLLATION_CONNECTION = 'utf8_unicode_ci'");
 
-    echo "Conexión realizada <br>";
+    // echo "Conexión realizada <br>";
 
 
 } catch (Exception $e) {
