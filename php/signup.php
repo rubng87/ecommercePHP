@@ -1,7 +1,9 @@
 <?php
 
-require_once('connection.php');
+// require_once('connection.php');
+echo "PHP obtienes: ".file_get_contents('php://input');
 
+/*
 $_POST = json_decode(file_get_contents('php://input'), true);
 
 // Comprobar el POST
@@ -81,3 +83,4 @@ $insert = null;
 $select = null;
 
 header('Location: ecommerce.php');
+*/
