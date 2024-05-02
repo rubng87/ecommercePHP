@@ -40,6 +40,7 @@ signupForm.addEventListener("submit", (e) => {
   let apellidos = formData.get("apellidos").trim();
   let password1 = formData.get("password1").trim();
   let password2 = formData.get("password2").trim();
+  let nif = formData.get("nif").toUpperCase().trim();
 
   // Pattern nombre
   const patternNombre = /^[a-zA-ZáéíóúàèìòùüñÑçÇÁÉÍÓÚÀÈÌÒÙÜ\s]+$/;
@@ -49,6 +50,20 @@ signupForm.addEventListener("submit", (e) => {
   if (!validarNombre(apellidos, patternNombre, "apellidos")) {
     return;
   }
+  if (password1 !== password2) {
+    document.getElementById("errorPassword").innerHTML =
+      "<p>Las contraseñas no coinciden</p>";
+    document.getElementById("password2").value = "";
+    return;
+  }
+
+  if (nif.length < 9) {
+    document.getElementById("error-nif").innerHTML =
+      "<p>NIF incorrecto</p>";
+    document.getElementById("password2").value = "";
+    return;
+  } 
+  const patternNIf = /[0-9a-zA-Z][a-z]/
 
 
   // if (!patternNombre.test(nombre)) {

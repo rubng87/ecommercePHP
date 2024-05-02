@@ -69,6 +69,7 @@
             <div>
               <label for="nif">NIF:</label>
               <input type="text" name="nif" id="nif"/>
+              <div id="error-Nif" class="errorValidacion"></div>
             </div>
 
             <div>
