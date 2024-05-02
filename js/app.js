@@ -42,9 +42,12 @@ signupForm.addEventListener("submit", (e) => {
   let password2 = formData.get("password2").trim();
   let nif = formData.get("nif").toUpperCase().trim();
   let direccion = formData.get("direccion").trim();
+  let ciudad = formData.get("ciudad").trim();
+  let telefono = formData.get("telefono").trim();
+  let email = formData.get("email").trim();
 
   // Pattern nombre
-  const patternNombre = /^[a-zA-ZáéíóúàèìòùüñÑçÇÁÉÍÓÚÀÈÌÒÙÜ\s]+$/;
+  const patternNombre = /^['a-zA-ZáéíóúàèìòùüñÑçÇÁÉÍÓÚÀÈÌÒÙÜ\s]+$/;
   if (!validarItems(nombre, patternNombre, "nombre")) {
     return;
   }
@@ -71,17 +74,27 @@ signupForm.addEventListener("submit", (e) => {
     document.getElementById("error-nif").style.display = "none";
   }
 
-  const patternDireccion = /^[a-zA-ZáéíóúàèìòùüñÑçÇÁÉÍÓÚÀÈÌÒÙÜ0-9\s]+$/;
-  if (!validarItems(direccion, patternNombre, "direccion")) {
+  const patternDireccion = /^['a-zA-ZáéíóúàèìòùüñÑçÇÁÉÍÓÚÀÈÌÒÙÜ0-9\s,-\/ºª]+$/;
+  if (!validarItems(direccion, patternDireccion, "direccion")) {
+    return;
+  }
+  if (!validarItems(ciudad, patternNombre, "ciudad")) {
     return;
   }
 
   // Generar el objeto con los datos
-  const data = {
+
+    const data = {
     nombre,
     apellidos,
+    password: password1 ,
+    email,
     nif,
-  };
+    direccion,
+    ciudad,
+    telefono
+  }
+  
   // let data2 = JSON.stringify(data);
   // console.log(data["nombre"]);
 
@@ -96,61 +109,10 @@ signupForm.addEventListener("submit", (e) => {
     .then((text) => console.log(text))
     .catch((error) => console.log(error));
 
-  // Con fetch se altera el flujo lineal del código
-  // console.log("Linea 60");
-
-  // const data = {
-  //   nombre,
-  //   apellidos,
-  //   password1,
-  //   password2,
-  //   email,
-  //   nif,
-  //   direccion,
-  //   ciudad,
-  //   telefono
-  // }
-
-  /*
-  let apellidos = document.getElementById("apellidos").value.trim();
-
-  let password1 = document.getElementById("password1").value;
-  let password2 = document.getElementById("password2").value;
-
-  let email = document.getElementById("emailUp").value.trim();
-  let nif = document.getElementById("nif").value.trim();
-  let direccion = document.getElementById("direccion").value.trim();
-  let ciudad = document.getElementById("ciudad").value.trim();
-  let telefono = document.getElementById("telefono").value.trim();
   
+  signupForm.reset();
 
 
-  
-  // Objeto tipo JSON
-let datos = {
-  "nombre": nombre,
-  "apellidos": apellidos,
-  "password": password1,
-  "email": email,
-  "nif": nif,
-  "direccion": direccion,
-  "ciudad": ciudad,
-  "telefono": telefono
-}
-
-// Enviar el JSON al fichero destino
-fetch('../php/signup.php', {
-  method: 'POST',
-  body: JSON.stringify(datos),
-  headers: {
-    'Content-Type': 'application/json'
-  }
-})
-
-
-  // signupForm.reset();
-
-  */
 });
 
 // function corregirNombre(nombre) {

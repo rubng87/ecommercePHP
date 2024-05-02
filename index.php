@@ -87,6 +87,7 @@
               <label for="ciudad">Ciudad</label>
               <input type="text" name="ciudad" id="ciudad" />
             </div>
+            <div id="error-ciudad" class="errorValidacion"></div>
           </fieldset>
           <div>
             <button type="submit">Enviar datos</button>
