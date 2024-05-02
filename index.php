@@ -69,8 +69,8 @@
             <div>
               <label for="nif">NIF:</label>
               <input type="text" name="nif" id="nif"/>
-              <div id="error-Nif" class="errorValidacion"></div>
             </div>
+            <div id="error-nif" class="errorValidacion"></div>
 
             <div>
               <label for="telefono">Teléfono</label>
@@ -81,6 +81,7 @@
               <label for="direccion">Dirección:</label>
               <input type="text" name="direccion" id="direccion"  />
             </div>
+            <div id="error-direccion" class="errorValidacion"></div>
 
             <div>
               <label for="ciudad">Ciudad</label>
