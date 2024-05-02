@@ -44,10 +44,10 @@ signupForm.addEventListener("submit", (e) => {
 
   // Pattern nombre
   const patternNombre = /^[a-zA-ZáéíóúàèìòùüñÑçÇÁÉÍÓÚÀÈÌÒÙÜ\s]+$/;
-  if (!validarNombre(nombre, patternNombre, "nombre")) {
+  if (!validarItems(nombre, patternNombre, "nombre")) {
     return;
   }
-  if (!validarNombre(apellidos, patternNombre, "apellidos")) {
+  if (!validarItems(apellidos, patternNombre, "apellidos")) {
     return;
   }
   if (password1 !== password2) {
@@ -57,13 +57,14 @@ signupForm.addEventListener("submit", (e) => {
     return;
   }
 
-  if (nif.length < 9) {
-    document.getElementById("error-nif").innerHTML =
-      "<p>NIF incorrecto</p>";
-    document.getElementById("password2").value = "";
+const patternNIf = /[0-9A-Z][0-9]{7}[0-9A-Z]/
+ if (nif.length < 9 || validarItems(nif, patternNif, "nif")) {
+    document.getElementById("error-nif").innerHTML = "<p>NIF incorrecto</p>";
+    document.getElementById("nif").value = "";
     return;
-  } 
-  const patternNIf = /[0-9a-zA-Z][a-z]/
+  
+  }
+  
 
 
   // if (!patternNombre.test(nombre)) {
@@ -172,7 +173,7 @@ fetch('../php/signup.php', {
 //   return nombreCorregido;
 // }
 
-function validarNombre(text, pattern, attribute) {
+function validarItems(text, pattern, attribute) {
   if (pattern.test(text)) {
     document.getElementById("error-" + attribute).style.display = "none";
     return true
