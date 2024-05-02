@@ -22,6 +22,9 @@
             <label for="password">Contraseña </label>
             <input type="text" name="password" id="password" />
           </div>
+          <div id="errorAccceso" class="errorValidacion">
+            <p>Usuario o contraseña incorrectos</p>
+          </div>
           <div>
             <button type="submit">Acceder</button>
             <button type="reset">Borrar</button>

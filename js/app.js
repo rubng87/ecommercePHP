@@ -105,8 +105,8 @@ signupForm.addEventListener("submit", (e) => {
       "Content-Type": "application/json",
     },
   })
-    .then((res) => res.text())
-    .then((text) => console.log(text))
+    .then(() => location.href= "php/ecommerce.php")
+    // .then((text) => console.log(text))
     .catch((error) => console.log(error));
 
   

@@ -1,64 +1,40 @@
 <?php
+session_start();
+require_once('connection.php');
+// echo "PHP obtiene: ".file_get_contents('php://input');
 
-// require_once('connection.php');
-echo "PHP obtienes: ".file_get_contents('php://input');
-
-/*
-$_POST = json_decode(file_get_contents('php://input'), true);
+$data = json_decode(file_get_contents('php://input'), true);
 
 // Comprobar el POST
 // echo "<pre>";
-// var_dump($_POST);
+// var_dump($data);
 // echo "</pre>";
 
-$nombre = $_POST['nombre'];
-$apellidos = $_POST['apellidos'];
-$password = $_POST['password'];
-$email = $_POST['email'];
-$nif = $_POST['nif'];
-$telefono = $_POST['telefono'];
-$direccion = $_POST['direccion'];
-$ciudad = $_POST['ciudad'];
+$nombre = $data['nombre'];
+$apellidos = $data['apellidos'];
+$password = $data['password'];
+$email = $data['email'];
+$nif = $data['nif'];
+$telefono = $data['telefono'];
+$direccion = $data['direccion'];
+$ciudad = $data['ciudad'];
 
 // Password encriptado 
-$password1 = password_hash($password, PASSWORD_DEFAULT);
+$password_encriptado = password_hash($password, PASSWORD_DEFAULT);
+// echo strlen($password_hash);
 
-// echo strlen($password1);
-
-
-$select = "SELECT * FROM clientes WHERE email = ?";
-$query = $conn->prepare($select);
-$query->execute([$email]);
-$result = $query->fetch();
-
-//Comprobar el POST
-// echo "<pre>";
-// var_dump($result);
-// echo "</pre>";
-
-if ($result) {
-    echo "El email ya existe";
-    die();
-}
+try {
+    $select = "SELECT * FROM clientes WHERE email = ?";
+    $query = $conn->prepare($select);
+    $query->execute([$email]);
+    $result = $query->fetch();
 
 
-// Obtener el id de la ciudad
-$select = "SELECT id_ciudad FROM ciudades WHERE nombre_ciudad = ?";
-$query = $conn->prepare($select);
-$query->execute([$ciudad]);
-$result = $query->fetch();
+    if ($result) {
+        echo "El email ya existe";
+        die();
+    }
 
-// echo "<pre>";
-// echo $result['id_ciudad'];
-// echo "</pre>";
-
-
-
-if (!$result) {
-    // Insertar la ciudad
-    $insert = "INSERT INTO ciudades (nombre_ciudad) VALUES (?)";
-    $query = $conn->prepare($insert);
-    $query->execute([$ciudad]);
 
     // Obtener el id de la ciudad
     $select = "SELECT id_ciudad FROM ciudades WHERE nombre_ciudad = ?";
@@ -69,18 +45,43 @@ if (!$result) {
     // echo "<pre>";
     // echo $result['id_ciudad'];
     // echo "</pre>";
+
+
+
+    if (!$result) {
+        // Insertar la ciudad
+        $insert = "INSERT INTO ciudades (nombre_ciudad) VALUES (?)";
+        $query = $conn->prepare($insert);
+        $query->execute([$ciudad]);
+
+        // Obtener el id de la ciudad
+        $select = "SELECT id_ciudad FROM ciudades WHERE nombre_ciudad = ?";
+        $query = $conn->prepare($select);
+        $query->execute([$ciudad]);
+        $result = $query->fetch();
+
+        // echo "<pre>";
+        // echo $result['id_ciudad'];
+        // echo "</pre>";
+    }
+
+    $id_ciudad = $result['id_ciudad'];
+
+    $insert = "INSERT INTO clientes (nombre_cliente, apellidos_cliente, password, email, nif, telefono, direccion_cliente, id_ciudad) VALUES (?,?,?,?,?,?,?,?)";
+    $query = $conn->prepare($insert);
+    $query->execute([$nombre, $apellidos, $password_encriptado, $email, $nif, $telefono, $direccion, $id_ciudad]);
+
+    echo "OK";
+
+    $insert = null;
+    $select = null;
+    $conn = null;
+    $_SESSION['email'] = $email;
+    $_SESSION['nombre'] = $nombre;
+    $_SESSION['apellidos'] = $apellidos;
+
+    header('Location: ecommerce.php');
+
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
 }
-
-$id_ciudad = $result['id_ciudad'];
-
-$insert = "INSERT INTO clientes (nombre_cliente, apellidos_cliente, password, email, nif, telefono, direccion_cliente, id_ciudad) VALUES (?,?,?,?,?,?,?,?)";
-$query = $conn->prepare($insert);
-$query->execute([$nombre, $apellidos, $password1, $email, $nif, $telefono, $direccion, $id_ciudad]);
-
-
-$conn = null;
-$insert = null;
-$select = null;
-
-header('Location: ecommerce.php');
-*/
