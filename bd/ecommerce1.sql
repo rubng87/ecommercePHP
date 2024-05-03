@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `ecommerce`
+-- Base de datos: `ecommerce1`
 --
-CREATE DATABASE IF NOT EXISTS `ecommerce` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `ecommerce`;
+-- CREATE DATABASE IF NOT EXISTS `ecommerce1` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `ecommerce1`;
 
 -- --------------------------------------------------w------
 

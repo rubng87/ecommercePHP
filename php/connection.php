@@ -2,8 +2,8 @@
 
 // Parámetros de la conexión
 $adress = "127.0.0.1";
-$user = "cief";
-$password = "123456";
+$user = "id22117884_cief";
+$password = "Bart2428.";
 $database = "ecommerce";
 
 // Conexión a la base de datos
