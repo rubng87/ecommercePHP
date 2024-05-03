@@ -4,7 +4,7 @@
 $adress = "127.0.0.1";
 $user = "cief";
 $password = "123456";
-$database = "ecommerce";
+$database = "ecommerce1";
 
 // Conexión a la base de datos
 $link = "mysql:host=$adress;port=3306;dbname=$database";

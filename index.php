@@ -91,6 +91,7 @@
               <input type="text" name="ciudad" id="ciudad" />
             </div>
             <div id="error-ciudad" class="errorValidacion"></div>
+            <p>Usuario o contraseña incorrectos</p>
           </fieldset>
           <div>
             <button type="submit">Enviar datos</button>
